@@ -8,7 +8,12 @@ const FormUser = ({ createNewUser, updateInfo, updateUserById, setUpdateInfo, se
   const { register, handleSubmit, reset } = useForm()
 
   useEffect(() => {
-    reset(updateInfo)
+    if (updateInfo) {
+      reset(updateInfo)
+    } else {
+      reset(defaultValues)
+    }
+
   }, [updateInfo])
 
   const submit = (data) => {
@@ -23,15 +28,15 @@ const FormUser = ({ createNewUser, updateInfo, updateUserById, setUpdateInfo, se
     reset(defaultValues)
   }
 
-const handleExit = () => {
-  setFormClose(true)
-}
+  const handleExit = () => {
+    setFormClose(true)
+  }
 
   return (
     <div className={`form-container ${formClose && 'close'}`}>
       <form className="form" onSubmit={handleSubmit(submit)}>
         <h3 className="form__title">{updateInfo ? 'update User Information' : 'Create New User'}</h3>
-       <span onClick={handleExit} className='form__exit'>X</span>
+        <span onClick={handleExit} className='form__exit'>X</span>
         <div className="form__item">
           <label className="form__label" htmlFor="email">Email</label>
           <input className="form__input" {...register('email')} type="email" id="email" />

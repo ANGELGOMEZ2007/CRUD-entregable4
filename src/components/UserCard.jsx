@@ -8,6 +8,7 @@ const UserCard = ({ user, deleteUserById, setUpdateInfo,setFormClose }) => {
 
   const handleUpdate = () => {
     setUpdateInfo(user)
+    setFormClose(false)
   }
 
  

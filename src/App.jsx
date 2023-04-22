@@ -24,6 +24,7 @@ function App() {
 
   const handleOpenForm = () => {
     setFormClose(false)
+    setUpdateInfo()
   }
 
   return (
@@ -51,6 +52,7 @@ function App() {
             user={user}
             deleteUserById={deleteUserById}
             setUpdateInfo={setUpdateInfo}
+            setFormClose={setFormClose}
           />
         ))}
       </div>

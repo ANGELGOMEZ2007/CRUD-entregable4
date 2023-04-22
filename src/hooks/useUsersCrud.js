@@ -27,7 +27,9 @@ const useUserCrud = () => {
     const deleteUserById = id => {
         const urlDelete = `${url}${id}/`
         axios.delete(urlDelete)
-          .then(res => getAllUsers())
+          .then(res => getAllUsers(),
+          alert('se elimino correctamente')
+          )
           .catch(err => console.log(err))
       }    
 
@@ -38,6 +40,7 @@ const useUserCrud = () => {
         .then(res => {
           //console.log(res.data)
           getAllUsers()
+          alert('se actualizo correctamente')
         })
         .catch(err => console.log(err))
       }
