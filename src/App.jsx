@@ -5,27 +5,46 @@ import UserCard from "./components/UserCard";
 import FormUser from "./components/FormUser";
 
 function App() {
-  const { users, getAllUsers, createNewUser, deleteUserById, updateUserById } =
-    useUserCrud();
 
   const [updateInfo, setUpdateInfo] = useState();
+  const [formClose, setFormClose] = useState(true)
+
+  const {
+    users,
+    getAllUsers,
+    createNewUser,
+    deleteUserById,
+    updateUserById
+  } = useUserCrud();
+
 
   useEffect(() => {
     getAllUsers();
   }, []);
 
+  const handleOpenForm = () => {
+    setFormClose(false)
+  }
+
   return (
-    <div className="App">
-      <h1>Users</h1>
+    <div className="app">
+
+      <header className="app__header">
+        <h1 className="app__title">Users</h1>
+        <button onClick={handleOpenForm} className="app__btn">Create new user</button>
+      </header>
+
 
       <FormUser
         createNewUser={createNewUser}
         updateInfo={updateInfo}
         updateUserById={updateUserById}
         setUpdateInfo={setUpdateInfo}
+        setFormClose={setFormClose}
+        formClose={formClose}
       />
 
-      <div>
+      <div className="app__user-container">
         {users?.map((user) => (
           <UserCard
             key={user.id}
