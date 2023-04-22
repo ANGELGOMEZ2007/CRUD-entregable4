@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import defaultValues from '../utils/defaultValues';
 import { useEffect } from 'react';
 import './styles/formUser.css'
+import Swal from 'sweetalert2';
 
 const FormUser = ({ createNewUser, updateInfo, updateUserById, setUpdateInfo, setFormClose, formClose }) => {
 
@@ -19,14 +20,49 @@ const FormUser = ({ createNewUser, updateInfo, updateUserById, setUpdateInfo, se
   const submit = (data) => {
 
     if (updateInfo) {
-      updateUserById(updateInfo.id, data)
-      setUpdateInfo()
+      Swal.fire({
+        title: 'Are you sure to update the data of this user?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'yes, update it'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          updateUserById(updateInfo.id, data)
+          setUpdateInfo()
+          reset(defaultValues)
+          Swal.fire(
+            'updated!',
+            'Your file has been updated.',
+            'success'
+          )
+        }
+      })
     } else {
-      createNewUser(data)
+      Swal.fire({
+        title: 'are you sure to create this user?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'yes, create it'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          createNewUser(data)
+          reset(defaultValues)
+          Swal.fire(
+            'created!',
+            'Your file has been created.',
+            'success'
+          )
+        }
+      })
     }
-
-    reset(defaultValues)
   }
+
 
   const handleExit = () => {
     setFormClose(true)
