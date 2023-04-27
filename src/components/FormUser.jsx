@@ -3,7 +3,6 @@ import defaultValues from '../utils/defaultValues';
 import { useEffect } from 'react';
 import './styles/formUser.css'
 import Swal from 'sweetalert2';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const FormUser = ({ createNewUser, updateInfo, updateUserById, setUpdateInfo, setFormClose, formClose }) => {
 
@@ -35,11 +34,6 @@ const FormUser = ({ createNewUser, updateInfo, updateUserById, setUpdateInfo, se
           setUpdateInfo()
           reset(defaultValues)
           handleExit()
-          Swal.fire(
-            'updated!',
-            'Your file has been updated.',
-            'success'
-          )
         }
       })
     } else {
@@ -56,11 +50,6 @@ const FormUser = ({ createNewUser, updateInfo, updateUserById, setUpdateInfo, se
           createNewUser(data)
           reset(defaultValues)
           handleExit()
-          Swal.fire(
-            'created!',
-            'Your file has been created.',
-            'success'
-          )
         }
       })
     }

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from 'axios'
-import swal from "sweetalert"
+import Swal from "sweetalert2"
 
 const useUserCrud = () => {
 
@@ -17,10 +17,22 @@ const useUserCrud = () => {
   const createNewUser = data => {
     axios.post(url, data)
       .then(res => {
-        //console.log(res.data)
         getAllUsers()
+        Swal.fire(
+          'created!',
+          'Your file has been created.',
+          'success'
+        )
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err),
+          Swal.fire(
+            'An error has occurred!',
+            'the file could not be created',
+            'warning'
+          )
+      }
+      )
   }
 
   //DELETE
@@ -28,9 +40,22 @@ const useUserCrud = () => {
     const urlDelete = `${url}${id}/`
     axios.delete(urlDelete)
       .then(res => getAllUsers(),
-       
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+
       )
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err),
+          Swal.fire(
+            'An error has occurred!',
+            'The selected file could not be deleted.',
+            'warning'
+          )
+      }
+      )
   }
 
   //UPDATE
@@ -38,11 +63,23 @@ const useUserCrud = () => {
     const urlUpdate = `${url}${id}/`
     axios.patch(urlUpdate, data)
       .then(res => {
-        //console.log(res.data)
         getAllUsers()
+        Swal.fire(
+          'updated!',
+          'Your file has been updated.',
+          'success'
+        )
 
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err),
+        Swal.fire(
+          'An error has occurred!',
+          'the selected file could not be updated.',
+          'warning'
+        )
+      }
+      )
   }
 
   return { users, getAllUsers, createNewUser, deleteUserById, updateUserById }

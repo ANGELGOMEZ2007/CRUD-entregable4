@@ -22,11 +22,6 @@ const UserCard = ({ user, deleteUserById, setUpdateInfo, setFormClose }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteUserById(user.id);
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
       }
     })
   }
