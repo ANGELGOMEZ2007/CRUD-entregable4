@@ -5,7 +5,7 @@ import Swal from "sweetalert2"
 const useUserCrud = () => {
 
   const [users, setUsers] = useState()
-  const url = 'https://users-crud.academlo.tech/users/'
+  const url = 'https://angel-crud-node.onrender.com/api/v1/users/'
 
   //GET
   const getAllUsers = () => {
